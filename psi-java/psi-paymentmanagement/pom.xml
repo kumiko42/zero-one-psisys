@@ -82,7 +82,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.zeroone.star.payment.PaymentApplication</mainClass>
+                    <mainClass>com.zeroone.star.paymentmanagement.Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>
