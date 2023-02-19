@@ -1,5 +1,5 @@
 server:
-  port: ${sp.paymentmanagement}
+  port: ${sp.mentmanagement}
 spring:
   application:
-    name: ${sn.paymentmanagement}
+    name: ${sn.mentmanagement}
