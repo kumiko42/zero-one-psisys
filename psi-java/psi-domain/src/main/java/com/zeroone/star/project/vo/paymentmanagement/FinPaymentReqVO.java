@@ -35,15 +35,15 @@ public class FinPaymentReqVO extends PageQuery {
     /**
      * 供应商
      */
-    private String supplierId;
+    private String name;
     /**
      * 业务部门
      */
-    private String opDept;
+    private String departName;
     /**
      * 业务员
      */
-    private String operator;
+    private String realname;
     /**
      * 申请金额
      */

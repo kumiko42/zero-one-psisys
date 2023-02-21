@@ -1,4 +1,4 @@
-package com.zeroone.star.paymentmanagement.service.impl;
+package com.zeroone.star.paymentmanagement.service.Impl;
 
 import com.zeroone.star.paymentmanagement.entity.FinPayment;
 import com.zeroone.star.paymentmanagement.mapper.FinPaymentMapper;
