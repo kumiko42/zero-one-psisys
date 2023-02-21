@@ -1,6 +1,7 @@
 package com.zeroone.star.paymentmanagement.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zeroone.star.paymentmanagement.entity.FinPaymentEntry;
 import com.zeroone.star.paymentmanagement.entity.PurchasePaymentEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PurchasePaymentMapper extends BaseMapper<PurchasePaymentEntity > {
+    int addPurchase(PurchasePaymentEntity entity);
+
 }

@@ -2,6 +2,7 @@ package com.zeroone.star.project.dto.paymentmanagement.purchasepayment;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
@@ -43,6 +44,6 @@ public class PaymentCreateDTO {
     private String remark;
 	@ApiModelProperty(value =  "附件", example = "temp/QQ图片20230115205241_1676461436246.gif")
     private String attachment;
-	@ApiModelProperty(value =  "付款单明细", example = "[]")
-    private List<String> finPaymentEntryList;
+	@ApiModelProperty(value =  "付款单明细数组", example = "[]")
+    private String finPaymentEntryList;
 }

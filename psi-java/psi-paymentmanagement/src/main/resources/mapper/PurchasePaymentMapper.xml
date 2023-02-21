@@ -2,6 +2,48 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zeroone.star.paymentmanagement.entity.PurchasePaymentEntity">
-
+<mapper namespace="com.zeroone.star.paymentmanagement.mapper.PurchasePaymentMapper">
+    <insert id="addPurchase" timeout="1000">
+        insert into fin_payment
+        <trim suffixOverrides="," prefix="(" suffix=")">
+            <if test="srcBillType != null and srcBillType != ''">
+                src_bill_type,
+            </if>
+            <if test="srcNo != null and srcNo != ''">
+                src_no,
+            </if>
+            <if test="srcBillId != null and srcBillId != ''">
+                src_bill_id,
+            </if>
+            <if test="attachment != null">
+                attachment,
+            </if>
+            id,amt,bill_date,bill_no,checked_amt,is_auto,is_rubric,payment_type,remark,subject,supplier_id,
+        </trim>
+        <trim suffixOverrides="," prefix="values (" suffix=")">
+            <if test="srcBillType != null and srcBillType != ''">
+                #{srcBillType},
+            </if>
+            <if test="srcNo != null and srcNo != ''">
+                #{srcNo},
+            </if>
+            <if test="srcBillId != null and srcBillId != ''">
+                #{srcBillId},
+            </if>
+            <if test="attachment != null">
+                #{attachment},
+            </if>
+            #{id},
+            #{amt},
+            #{billDate},
+            #{billNo},
+            #{checkedAmt},
+            #{isAuto},
+            #{isRubric},
+            #{paymentType},
+            #{remark},
+            #{subject},
+            #{supplierId},
+        </trim>
+    </insert>
 </mapper>

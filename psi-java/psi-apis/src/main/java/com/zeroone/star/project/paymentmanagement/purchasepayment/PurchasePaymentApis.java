@@ -6,6 +6,8 @@ import com.zeroone.star.project.dto.paymentmanagement.purchasepayment.PaymentUpd
 import com.zeroone.star.project.vo.JsonVO;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * @author Tomcat
  * @Date 2023/2/15 22:17
@@ -17,7 +19,7 @@ public interface PurchasePaymentApis {
      * @param create 增加采购付款的数据传输对象
      * @return {@link JsonVO}<{@link String}>
      */
-    JsonVO<String> save(PaymentCreateDTO create);
+    JsonVO<String> save(PaymentCreateDTO create) throws IllegalAccessException;
 
     /**
      * 删除接口
@@ -33,7 +35,7 @@ public interface PurchasePaymentApis {
      * @param update 修改采购付款的数据传输对象
      * @return {@link JsonVO}<{@link String}>
      */
-    JsonVO<String> update(PaymentUpdateDTO update);
+    JsonVO<String> update(PaymentUpdateDTO update) throws IllegalAccessException;
 
     /**
      * 上传文件
@@ -41,5 +43,5 @@ public interface PurchasePaymentApis {
      * @param file 文件
      * @return {@link JsonVO}<{@link String}>
      */
-    JsonVO<String> upload(MultipartFile file);
+    JsonVO<String> upload(MultipartFile file) throws Exception;
 }

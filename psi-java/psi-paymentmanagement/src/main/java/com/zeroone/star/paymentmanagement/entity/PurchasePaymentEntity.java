@@ -1,5 +1,6 @@
 package com.zeroone.star.paymentmanagement.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
-import java.util.List;
+
+import static com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID;
 
 /**
  * @author Tomcat
@@ -17,15 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TableName()
+@TableName("fin_payment")
 public class PurchasePaymentEntity {
+    @TableId(type=ASSIGN_ID)
+    private String id;
     private String remark;
     private String billNo;
     private String approvalResultType;
     private String updateBy;
     private String isEffective;
     private String isVoided;
-    private Date billType;
     private String approver;
     private Date billDate;
     private String srcBillType;
@@ -43,24 +46,10 @@ public class PurchasePaymentEntity {
     private String version;
     private String attachment;
     private String subject;
-    private String id;
     private String isClosed;
     private String bpmiInstanceId;
     private String paymentType;
     private String supplierId;
     private String amt;
     private String checkedAmt;
-    private String uncheckedAmt;
-    private String paymentTypeDictText;
-    private String supplierIdDictText;
-    private String updateByDictText;
-    private String isEffectiveDictText;
-    private String isVoidedDictText;
-    private String isAutoDictText;
-    private String isRubricDictText;
-    private String sysOrgCodeDictText;
-    private String createByDictText;
-    private String billStageDictText;
-    private String isClosedDictText;
-    private List<String> finPaymentEntryList;
 }

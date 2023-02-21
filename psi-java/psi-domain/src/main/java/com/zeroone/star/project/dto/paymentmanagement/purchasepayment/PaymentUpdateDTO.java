@@ -2,6 +2,7 @@ package com.zeroone.star.project.dto.paymentmanagement.purchasepayment;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,8 +13,9 @@ import java.util.List;
  * @Date 2023/2/15 17:31
  */
 @Data
+@AllArgsConstructor
 @ApiModel("修改采购付款的数据传输对象")
-public class PaymentUpdateDTO {
+public class PaymentUpdateDTO{
     @ApiModelProperty(value ="备注", example = "test")
     private String remark;
     @ApiModelProperty(value =  "单据日期", example = "CGFK-230215-035")
@@ -27,7 +29,7 @@ public class PaymentUpdateDTO {
     @ApiModelProperty(value =  "是否作废", example = "0")
     private String isVoided;
     @ApiModelProperty(value =  "单据阶段", example = "FinPayment")
-    private Date billType;
+    private String billType;
     @ApiModelProperty(value =  "审核人", example = "")
     private String approver;
     @ApiModelProperty(value =  "单据日期", example = "2023-02-15")
@@ -38,7 +40,7 @@ public class PaymentUpdateDTO {
     private String approvalRemark;
     @ApiModelProperty(value =  "源单号", example = "")
     private String srcNo;
-    @ApiModelProperty(value =  "修改时间", example = "2023-02-15 17")
+    @ApiModelProperty(value =  "修改时间", example = "2023-02-15 17:32:12")
     private Date updateTime;
     @ApiModelProperty(value =  "是否自动生成", example = "0")
     private String isAuto;
@@ -101,5 +103,5 @@ public class PaymentUpdateDTO {
     @ApiModelProperty(value =  "已关闭", example = "否")
     private String isClosedDictText;
     @ApiModelProperty(value =  "付款单明细", example = "[]")
-    private List<String> finPaymentEntryList;
+    private String finPaymentEntryList;
 }
