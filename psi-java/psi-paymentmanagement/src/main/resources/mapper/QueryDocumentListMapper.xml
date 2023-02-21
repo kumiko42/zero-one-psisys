@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zeroone.star.paymentmanagement.mapper.QueryDocumentListMapper">
-
+    <select id="queryDocumentList" resultType="com.zeroone.star.paymentmanagement.entity.QueryDocumentList">
+        select *
+        from fin_payment_req f1
+        where f1.billNo=#{condition.billNo}
+    </select>
 </mapper>

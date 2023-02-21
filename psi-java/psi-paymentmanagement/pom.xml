@@ -25,6 +25,7 @@
             <version>3.5.7</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-core</artifactId>
@@ -35,6 +36,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.zeroone.star</groupId>
             <artifactId>psi-apis</artifactId>

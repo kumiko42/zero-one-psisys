@@ -5,6 +5,7 @@ import com.zeroone.star.paymentmanagement.entity.QueryDocumentList;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zeroone.star.project.query.paymentmanagement.QueryDocumentListQuery;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Bean;
 
 /**
  * <p>
@@ -16,5 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface QueryDocumentListMapper extends BaseMapper<QueryDocumentList> {
+
     public Page<QueryDocumentList> queryDocumentList(Page page, QueryDocumentListQuery condition);
 }

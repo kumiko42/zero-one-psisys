@@ -8,9 +8,10 @@ import com.zeroone.star.paymentmanagement.service.paymentmanagement.IQueryDocume
 import com.zeroone.star.project.query.paymentmanagement.QueryDocumentListQuery;
 import com.zeroone.star.project.vo.PageVO;
 import com.zeroone.star.project.vo.paymentmanagement.QueryDocumentListVO;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
+@Service
 public class QueryDocumentListServiceImpl extends ServiceImpl<QueryDocumentListMapper, QueryDocumentList> implements IQueryDocumentListService {
 
     @Resource
@@ -19,9 +20,9 @@ public class QueryDocumentListServiceImpl extends ServiceImpl<QueryDocumentListM
     @Override
     public PageVO<QueryDocumentListVO> queryDocumentList(QueryDocumentListQuery query) {
         //构建分页对象
-        Page<QueryDocumentList> addressBookPage = new Page<>(query.getPageIndex(), query.getPageSize());
+        Page<QueryDocumentList> QueryDocumentListPage = new Page<>(query.getPageIndex(), query.getPageSize());
         // 执行查询
-        Page<QueryDocumentList> result = mapper.queryDocumentList(addressBookPage,query);
+        Page<QueryDocumentList> result = mapper.queryDocumentList(QueryDocumentListPage,query);
         return PageVO.create(result, QueryDocumentListVO.class);
     }
 }

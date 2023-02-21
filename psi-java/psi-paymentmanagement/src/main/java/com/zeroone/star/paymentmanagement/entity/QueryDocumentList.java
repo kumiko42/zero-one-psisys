@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +21,7 @@ import lombok.Setter;
  * @author achuan
  * @since 2023-02-13
  */
+@Data
 @Getter
 @Setter
 @TableName("fin_payment_req")
@@ -28,33 +32,42 @@ public class QueryDocumentList implements Serializable {
     /**
      * ID
      */
+    @ApiModelProperty("ID")
     private String id;
 
     /**
      * 单据编号
      */
+
+    @ApiModelProperty("单据编号")
     private String billNo;
 
     /**
      * 单据日期
      */
+    @ApiModelProperty("单据日期")
     private LocalDate billDate;
-
     /**
      * 源单类型
      */
+    @ApiModelProperty("源单类型")
     private String srcBillType;
 
     /**
      * 源单id
      */
+
+    @ApiModelProperty("源单id")
     private String srcBillId;
 
     /**
      * 源单号
      */
+
+    @ApiModelProperty("源单号")
     private String srcNo;
 
+    @ApiModelProperty("类型")
     private String subject;
 
     /**
