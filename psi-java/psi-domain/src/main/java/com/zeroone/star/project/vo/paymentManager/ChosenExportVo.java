@@ -53,7 +53,7 @@ public class ChosenExportVo {
     @ExcelProperty(value = "自动单据 ")
     private Integer isAuto;
 
-    @ExcelProperty(value = "红字单据 ")
+    @ExcelProperty(value = "是否红字")
     private Integer isRubric;
 
     @ExcelProperty(value = "备注")
@@ -76,4 +76,20 @@ public class ChosenExportVo {
 
     @ExcelProperty(value = "修改人")
     private String updateBy;
+    @ExcelProperty(value = "分录号")
+    private int entryNo;
+    @ExcelProperty(value = "源单id")
+    private String srcBillId;
+    @ExcelProperty(value = "源单分录id")
+    private String srcEntryId;
+    @ExcelProperty(value = "源单分录号")
+    private String srcNo;
+    @ExcelProperty(value = "结算方式")
+    private String settleMethod;
+    @ExcelProperty(value = "资金账户")
+    private String bankAccountId;
+    @ExcelProperty(value = "自定义1")
+    private String custom1;
+    @ExcelProperty(value = "自定义2")
+    private String custom2;
 }

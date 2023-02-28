@@ -55,6 +55,6 @@ public class PaymentManagerController implements PaymentManagerApis {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JsonVO.success(data);
+        return JsonVO.success(null);
     }
 }
