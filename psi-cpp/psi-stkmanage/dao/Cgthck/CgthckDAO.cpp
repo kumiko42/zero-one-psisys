@@ -279,7 +279,7 @@ uint64_t CgthckDAO::importData(const CgthckEntryDO& iobj)
 				?, ?, ?, ?, ?, ?, ?, ?, ?, \
 				?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	uint64_t result = sqlSession->executeInsert(sql,
-		"%s%s%s%s%s%s\
+					"%s%s%s%s%s%s\
 					%d%d%d%d%d%d\
 					%d%d%d%d%d%d\
 					%s%s%s%s%s%s\

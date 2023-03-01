@@ -610,11 +610,11 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
         // 源单id
         tmpEntryDo.setSrcBillId(tmpData[j++]);
 
-        //
+        // 
         cgthckEntryDo.push_back(tmpEntryDo);
     }
     // 处理list<CgthckDO>
-    uint64_t result = 0;
+    int result = 0;
     for (auto& sub : cgthckDo)
     {
         CgthckDAO dao;
@@ -688,37 +688,6 @@ ExportCgthckVO CgthckService::exportData(const ExportCgthckFileDTO& dto)
         CharsetConvertHepler::ansiToUtf8("核批意见"),
     };
     data.push_back(header);
-    vector<string> entryHeader{
-        CharsetConvertHepler::ansiToUtf8("物料"),
-        CharsetConvertHepler::ansiToUtf8("批次号"),
-        CharsetConvertHepler::ansiToUtf8("仓库"),
-        CharsetConvertHepler::ansiToUtf8("出入方向"),
-        CharsetConvertHepler::ansiToUtf8("供应商"),
-        CharsetConvertHepler::ansiToUtf8("计量单位"),
-        CharsetConvertHepler::ansiToUtf8("涨吨数量+/-"),
-        CharsetConvertHepler::ansiToUtf8("数量"),
-        CharsetConvertHepler::ansiToUtf8("计入成本费用"),
-        CharsetConvertHepler::ansiToUtf8("成本"),
-        CharsetConvertHepler::ansiToUtf8("结算数量"),
-        CharsetConvertHepler::ansiToUtf8("税率%"),
-        CharsetConvertHepler::ansiToUtf8("含税单价"),
-        CharsetConvertHepler::ansiToUtf8("折扣率%"),
-        CharsetConvertHepler::ansiToUtf8("税额"),
-        CharsetConvertHepler::ansiToUtf8("结算金额"),
-        CharsetConvertHepler::ansiToUtf8("已开票数量"),
-        CharsetConvertHepler::ansiToUtf8("已开票金额"),
-        CharsetConvertHepler::ansiToUtf8("自定义1"),
-        CharsetConvertHepler::ansiToUtf8("源单分录号"),
-        CharsetConvertHepler::ansiToUtf8("分录号"),
-        CharsetConvertHepler::ansiToUtf8("自定义2"),
-        CharsetConvertHepler::ansiToUtf8("源单分录id"),
-        CharsetConvertHepler::ansiToUtf8("源单类型"),
-        CharsetConvertHepler::ansiToUtf8("备注"),
-        CharsetConvertHepler::ansiToUtf8("单据编号"),
-        CharsetConvertHepler::ansiToUtf8("源单id")
-    };
-    data.push_back(entryHeader);
-
     // 如果查询对象不为空
     if (!listDo.empty())
     {
@@ -765,6 +734,38 @@ ExportCgthckVO CgthckService::exportData(const ExportCgthckFileDTO& dto)
             data.push_back(sub);
         }
     }
+
+    vector<string> entryHeader{
+        CharsetConvertHepler::ansiToUtf8("物料"),
+        CharsetConvertHepler::ansiToUtf8("批次号"),
+        CharsetConvertHepler::ansiToUtf8("仓库"),
+        CharsetConvertHepler::ansiToUtf8("出入方向"),
+        CharsetConvertHepler::ansiToUtf8("供应商"),
+        CharsetConvertHepler::ansiToUtf8("计量单位"),
+        CharsetConvertHepler::ansiToUtf8("涨吨数量+/-"),
+        CharsetConvertHepler::ansiToUtf8("数量"),
+        CharsetConvertHepler::ansiToUtf8("计入成本费用"),
+        CharsetConvertHepler::ansiToUtf8("成本"),
+        CharsetConvertHepler::ansiToUtf8("结算数量"),
+        CharsetConvertHepler::ansiToUtf8("税率%"),
+        CharsetConvertHepler::ansiToUtf8("含税单价"),
+        CharsetConvertHepler::ansiToUtf8("折扣率%"),
+        CharsetConvertHepler::ansiToUtf8("税额"),
+        CharsetConvertHepler::ansiToUtf8("结算金额"),
+        CharsetConvertHepler::ansiToUtf8("已开票数量"),
+        CharsetConvertHepler::ansiToUtf8("已开票金额"),
+        CharsetConvertHepler::ansiToUtf8("自定义1"),
+        CharsetConvertHepler::ansiToUtf8("源单分录号"),
+        CharsetConvertHepler::ansiToUtf8("分录号"),
+        CharsetConvertHepler::ansiToUtf8("自定义2"),
+        CharsetConvertHepler::ansiToUtf8("源单分录id"),
+        CharsetConvertHepler::ansiToUtf8("源单类型"),
+        CharsetConvertHepler::ansiToUtf8("备注"),
+        CharsetConvertHepler::ansiToUtf8("单据编号"),
+        CharsetConvertHepler::ansiToUtf8("源单id")
+    };
+    data.push_back(entryHeader);
+
     if (!listEntryDo.empty())
     {
         for (auto& tempEntryDo : listEntryDo)
@@ -813,19 +814,19 @@ ExportCgthckVO CgthckService::exportData(const ExportCgthckFileDTO& dto)
     excel.writeVectorToFile(fileName, sheetName, data);
     //excel.writeVectorToFile(fileName, entrySheetName, entryData);
 
-    // 定义fastdfs客户端对象
-#ifdef LINUX
-    FastDfsClient client("conf/client.conf", 3);
-#else
-    FastDfsClient client("1.15.240.108");
-#endif
-    // 将文件上传到fastdfs
-    string fieldName = client.uploadFile(fileName);
-    // 删除本地文件
-    std::remove(fieldName.c_str());
-    // 返回下载地址
-    fieldName = "http://1.15.240.108:8888/" + fieldName;
+//    // 定义fastdfs客户端对象
+//#ifdef LINUX
+//    FastDfsClient client("conf/client.conf", 3);
+//#else
+//    FastDfsClient client("1.15.240.108");
+//#endif
+//    // 将文件上传到fastdfs
+//    string fieldName = client.uploadFile(fileName);
+//    // 删除本地文件
+//    std::remove(fieldName.c_str());
+//    // 返回下载地址
+//    fieldName = "http://1.15.240.108:8888/" + fieldName;
 
-    ExportCgthckVO result(fieldName);
+    ExportCgthckVO result(fileName);
     return result;
 }
