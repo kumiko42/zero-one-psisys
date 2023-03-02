@@ -454,6 +454,28 @@ int CgthckService::voided(const ModifyCgthckBillDTO& dto, const PayloadDTO& payl
 
 int CgthckService::importData(const ImportCgthckFileDTO& dto)
 {
+    // 生成雪花id
+    SnowFlake sf(1, 5);
+
+    // 用来记录单据表编号 提供给其对应的明细Mid
+    map<string, string> billToMid;
+    vector<string> noList;
+    // 检验明细表的主表是谁
+    auto check = [](const map<string, string> mp, const string& batchNo)
+    {
+        // 获取明细的源点编号
+        int pos = batchNo.find_last_of('-');
+        string srcBillNo = batchNo.substr(0, pos);
+
+        // 查找srcBillNo是否存在
+        auto it = mp.find(srcBillNo);
+        if (it != mp.end())
+        {
+            return it->second;
+        }
+        return string{ "" };
+    };
+
     // 解析Excel中的数据
     ExcelComponent excel;
     string fileName = dto.getFiles().front();
@@ -472,6 +494,12 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
             CgthckDO tmpDo;
             int j = 0;
             auto tmpData = data[i];
+
+            // 生成id
+            string id = to_string(sf.nextId());
+
+            // ID
+            tmpDo.setId(id);
             // 出入库类型
             tmpDo.setStockIoType(tmpData[j++]);
             // 是否有往来
@@ -519,7 +547,8 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
             // 已作废
             tmpDo.setIsVoided(stoi(tmpData[j++]));
             // 单据编号
-            tmpDo.setBillNo(tmpData[j++]);
+            string billNo = tmpData[j++];
+            tmpDo.setBillNo(billNo);
             // 是否红字
             tmpDo.setIsRubric(stoi(tmpData[j++]));
             // 源单类型
@@ -545,6 +574,9 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
             // 核批意见
             tmpDo.setApprovalRemark(tmpData[j++]);
 
+            // 构建pair(billNo, id) 放入map中
+            billToMid[billNo] = id;
+
             //
             cgthckDo.push_back(tmpDo);
         }
@@ -555,10 +587,14 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
         CgthckEntryDO tmpEntryDo;
         auto tmpData = entryData[i];
         int j = 0;
+
+        // id
+        tmpEntryDo.setId(to_string(sf.nextId()));
         // 物料
         tmpEntryDo.setMaterialId(tmpData[j++]);
         // 批次号
-        tmpEntryDo.setBatchNo(tmpData[j++]);
+        string batchNo = tmpData[j++];
+        tmpEntryDo.setBatchNo(batchNo);
         // 仓库
         tmpEntryDo.setWarehouseId(tmpData[j++]);
         // 出入方向
@@ -609,21 +645,22 @@ int CgthckService::importData(const ImportCgthckFileDTO& dto)
         tmpEntryDo.setBillNo(tmpData[j++]);
         // 源单id
         tmpEntryDo.setSrcBillId(tmpData[j++]);
+        // mid
+        tmpEntryDo.setMid(check(billToMid, batchNo));
 
         // 
         cgthckEntryDo.push_back(tmpEntryDo);
     }
     // 处理list<CgthckDO>
+    CgthckDAO dao;
     int result = 0;
     for (auto& sub : cgthckDo)
     {
-        CgthckDAO dao;
         result += dao.importData(sub);
     }
     // 处理list<CgthckEntryDO>
     for (auto& sub : cgthckEntryDo)
     {
-        CgthckDAO dao;
         result += dao.importData(sub);
     }
     return result;
