@@ -36,168 +36,52 @@ import { reactive, toRefs, ref } from 'vue'
 // 抽屉
 const drawerStatus = reactive({
   title: '抽屉标题',
+  /**账号
+    账户名
+    币种
+    行号
+    银行地址
+    启用
+    账户管理员
+    备注*/ 
   basicItems: [
     {
       type: 'input',
-      prop: 'name1',
-      label: '编码'
+      prop: 'code',
+      label: '账号'
     },
     {
       type: 'input',
-      prop: 'name2',
-      label: '名称'
+      prop: 'auxName',
+      label: '账户名'
     },
     {
       type: 'input',
-      prop: 'name3',
-      label: '客户分类'
+      prop: 'invoiceBankCode',
+      label: '行号'
     },
     {
       type: 'input',
-      prop: 'name4',
-      label: '客户等级'
+      prop: 'recvAddress',
+      label: '银行地址'
     },
     {
       type: 'input',
-      prop: 'name5',
-      label: '纳税规模'
-    },
-    {
-      type: 'input',
-      prop: 'name6',
-      label: '欠款额度'
-    },
-    {
-      type: 'input',
-      prop: 'name7',
+      prop: 'isEnabled',
       label: '启用'
     },
     {
       type: 'input',
-      prop: 'name8',
+      prop: 'isEnabled',
+      label: '账户管理员'
+    },
+    {
+      type: 'input',
+      prop: 'remark',
       label: '备注'
     }
   ],
   toggleItems: [
-    {
-      title: '开票信息',
-      name: '折叠唯一标识符号',
-      items: [
-        {
-          type: 'input',
-          prop: 'toggleName',
-          label: '单位名称'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '税号'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '开户行'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '行号'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '账号'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '联系电话'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender',
-          label: '开票地址'
-        }
-      ]
-    },
-    {
-      title: '办款资料',
-      name: '折叠2唯一标识符号',
-      items: [
-        {
-          type: 'input',
-          prop: 'toggle21',
-          label: '单位名称'
-        },
-        {
-          type: 'input',
-          prop: 'toggle22',
-          label: '开户行'
-        },
-        {
-          type: 'input',
-          prop: 'toggle23',
-          label: '行号'
-        },
-        {
-          type: 'input',
-          prop: 'toggle24',
-          label: '账号'
-        }
-      ]
-    },
-    {
-      title: '收件信息',
-      name: '折叠3唯一标识符号',
-      items: [
-        {
-          type: 'input',
-          prop: 'toggleName3',
-          label: '收件人'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender3',
-          label: '联系电话'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender3',
-          label: '传真'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender3',
-          label: 'Email'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender3',
-          label: '地址'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender3',
-          label: '邮编'
-        }
-      ]
-    },
-    {
-      title: '财务信息',
-      name: '折叠4唯一标识符号',
-      items: [
-        {
-          type: 'input',
-          prop: 'toggleName4',
-          label: '财务信息联系人'
-        },
-        {
-          type: 'input',
-          prop: 'toggleGender4',
-          label: '财务信息联系电话'
-        }
-      ]
-    },
     {
       title: '其他信息',
       name: '折叠4唯一标识符号',
