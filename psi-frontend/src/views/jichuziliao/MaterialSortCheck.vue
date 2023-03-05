@@ -1,17 +1,15 @@
 <template>
   <div>
     <!-- 物料分类 -->
-    <psi-form :items="items" :formData="formData" :toggleItems="toggleItems" @query="doQuery" @reset="doReset"></psi-form>
-
-
-
+    <psi-form :items="items" :formData="formData" :toggleItems="toggleItems" @query="doQuery"
+              @reset="doReset"></psi-form>
 
 
     <!-- 表格数据 -->
     <!-- 修改点1 -->
     <div style="margin-top:10px">
       <psi-table :items="tableItems" :tableData="tableData" :attributes="attributes" :pagination="pagination"
-        @add="addClient">
+                 @add="addClient">
 
 
         <template v-slot:basicOperation="slot">
@@ -26,13 +24,18 @@
 
     <!-- 新增-抽屉 -->
     <psi-drawer v-model="drawerVisible" :title="drawerStatus.title" :basicItems="drawerStatus.basicItems"
-      :toggleItems="drawerStatus.toggleItems" :formData="drawerStatus.formData" @confirm="confirm" />
+                :toggleItems="drawerStatus.toggleItems" :formData="drawerStatus.formData" @confirm="confirm"/>
   </div>
 </template>
-    
+
 <script setup>
-import { reactive, toRefs, ref } from 'vue'
-import { } from './api/materialsortcheck.js'
+import {reactive, toRefs, ref} from 'vue'
+import {
+  getBase,
+  deleteById,
+  getDetail
+} from './api/materialsortcheck.js'
+import {ElMessage} from "element-plus";
 // 抽屉
 const drawerStatus = reactive({
   title: '抽屉标题',
@@ -97,14 +100,73 @@ function confirm(data) {
 
 let drawerVisible = ref(false)
 
+//查询
+function doQuery() {
+  //1.前端处理参数
+  let params = {}
+  params.code = formData.value.code
+  params.name = formData.value.name
+  getDetail(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+
+//重置
+function doReset() {
+  //1.前端处理参数
+  let params = {}
+  params.code = ''
+  params.name = ''
+  params.pageIndex = '3'
+  params.pageSize = '2'
+  getBase(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+
 // 编辑删除
 // 修改点3~5
 function addClient() {
   drawerVisible.value = true
 }
+
 // 修改
 function reviseClient() {
   drawerVisible.value = true
+}
+
+//删除
+function deleteRole(data){
+  //1.前端处理参数
+  let params = {}
+  params.id = data.date
+  deleteById(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
 }
 
 let clientEditDialogVisible = ref(false)
@@ -137,7 +199,7 @@ const formState = reactive({
   }
 })
 
-const { items, toggleItems, formData } = toRefs(formState)
+const {items, toggleItems, formData} = toRefs(formState)
 const status = reactive({
   // table列配置
   tableItems: [
@@ -255,7 +317,7 @@ const status = reactive({
   }
 })
 
-const { tableItems, tableData, attributes } = toRefs(status)
+const {tableItems, tableData, attributes} = toRefs(status)
 
 // 分页相关配置
 // 待后续修改2
@@ -267,6 +329,5 @@ const pagination = reactive({
   layout: 'total, sizes, prev, pager, next, jumper'
 })
 </script>
-    
+
 <style lang='stylus' scoped></style>
-    

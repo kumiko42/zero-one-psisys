@@ -29,10 +29,12 @@
       :toggleItems="drawerStatus.toggleItems" :formData="drawerStatus.formData" @confirm="confirm" />
   </div>
 </template>
-    
+
 <script setup>
 import { reactive, toRefs, ref } from 'vue'
-import { } from './api/measurementcheck.js'
+import {measurementDelete, measurementGet, measurementGetKid} from './api/measurementcheck.js'
+import {currencyDetail, currencyQuery} from "./api/currencycheck";
+import {ElMessage} from "element-plus";
 // 抽屉
 const drawerStatus = reactive({
   title: '抽屉标题',
@@ -118,6 +120,47 @@ function confirm(data) {
 
 let drawerVisible = ref(false)
 
+//查询
+function doQuery(){
+  //1.前端处理参数
+  let params = {}
+  params.code = formData.value.code
+  params.name = formData.value.name
+  measurementGetKid(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+
+
+//重置
+function doReset() {
+  //1.前端处理参数
+  let params = {}
+  params.name = ''
+  params.pageIndex = '1'
+  params.pageSize = '2'
+  measurementGet(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+
+
 // 编辑删除
 // 修改点3~5
 function addClient() {
@@ -126,6 +169,23 @@ function addClient() {
 // 修改
 function reviseClient() {
   drawerVisible.value = true
+}
+
+//删除
+function deleteRole(data) {
+  let params = {}
+  params.id = data.date
+  measurementDelete(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
 }
 
 let clientEditDialogVisible = ref(false)
@@ -288,6 +348,5 @@ const pagination = reactive({
   layout: 'total, sizes, prev, pager, next, jumper'
 })
 </script>
-    
+
 <style lang='stylus' scoped></style>
-    

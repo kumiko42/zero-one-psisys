@@ -20,38 +20,39 @@
       :items="tableItems"
       :tableData="tableData"
       :attributes="attributes"
-      :pagination="pagination" 
+      :pagination="pagination"
       @add="addClient"
     >
-    
+
 
       <template v-slot:basicOperation="slot">
       <!-- 修改点2 -->
-      <el-button link 
-        type="primary" 
+      <el-button link
+        type="primary"
         @click="drawerVisible = true"
         >编辑</el-button>
 
         <el-button link type="primary" @click="deleteRole(slot.data)">删除</el-button>
       </template>
-  
+
     </psi-table>
     </div>
 
     <!-- 新增-抽屉 -->
-    <psi-drawer 
-      v-model="drawerVisible" 
-      :title="drawerStatus.title" 
+    <psi-drawer
+      v-model="drawerVisible"
+      :title="drawerStatus.title"
       :basicItems="drawerStatus.basicItems"
-      :toggleItems="drawerStatus.toggleItems" 
-      :formData="drawerStatus.formData" 
+      :toggleItems="drawerStatus.toggleItems"
+      :formData="drawerStatus.formData"
       @confirm="confirm" />
   </div>
 </template>
-    
+
 <script setup>
 import { reactive, toRefs, ref } from 'vue'
-import {} from './api/materialcheck.js'
+import {getBasmaterial,getBasmaterialDetail,postAddBasmaterial,putModifyBasmaterial,deleteBasmaterial} from './api/materialcheck.js'
+import {ElMessage} from "element-plus";
 // 抽屉
 const drawerStatus = reactive({
   title: '物料-新增',
@@ -120,6 +121,46 @@ function confirm(data) {
 
 let drawerVisible = ref(false)
 
+//查询
+function doQuery(){
+  //1.前端处理参数
+  let params = {}
+  params.code = formData.value.code
+  params.name = formData.value.name
+  getBasmaterialDetail(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+//重置
+function doReset(){
+  //1.前端处理参数
+  let params = {}
+  params.code = ''
+  params.name = ''
+  params.pageIndex = '1'
+  params.pageSize = '10'
+  getBasmaterial(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
+
+
 // 编辑删除
 // 修改点3~5
 function addClient() {
@@ -128,7 +169,25 @@ function addClient() {
 // 修改
 function reviseClient() {
   drawerVisible.value = true
-} 
+}
+//删除
+function deleteRole(data){
+  //1.前端处理参数
+  let params = {}
+  params.id = data.date
+
+  deleteBasmaterial(
+      {
+        params
+      },
+      (data) => {
+        console.log(data)
+      },
+      (msg) => {
+        ElMessage.error(msg)
+      }
+  )
+}
 
 let clientEditDialogVisible = ref(false)
 
@@ -305,7 +364,7 @@ const status = reactive({
       address: 'No. 189, Grove St, Los Angeles',
       zip: 'CA 90036',
       tag: 'Home'
-    } 
+    }
   ],
   // table 总体配置
   attributes: {
@@ -332,6 +391,5 @@ const pagination = reactive({
   layout: 'total, sizes, prev, pager, next, jumper'
 })
 </script>
-    
+
 <style lang='stylus' scoped></style>
-    
