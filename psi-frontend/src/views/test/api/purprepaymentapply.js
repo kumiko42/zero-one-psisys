@@ -137,25 +137,29 @@ export function handleGetPrepaybillDetail() {
 export function handlePostAdd() {
   // 自定义请求参数
   let params = {
-    bill_no: "123456711",
-	  bill_date: "2023-5-5",
-	  subject: "采购笔记本",
-	  op: "李业武",
-	  op_dept: "市场部",
-	  supplier_id: "广电总局",
-	  remark:"附件备注",
-	  attachment: "xxx",
+    bill_no: "123456711",          //单据编号
+	  bill_date: "2023-5-5",      //单据日期
+	  subject: "采购笔记本",     //单据主题
+	  op: "李业武",             //业务员
+	  op_dept: "市场部",         //业务部门
+	  supplier_id: "广电总局",      //供应商
+    is_auto:0,                //是否自动生成（0为否，1为是）
+    is_rubric:0,            //是否为红字单据（0为否，1为是）
+    bill_stage:"编制中",    //如果点保存，就是“编制中”；如果点提交，就是“编制完”
+    version:0,                //版本号
+	  remark:"附件备注",        //附件备注
+	  attachment: "xxx",         //附件
     detail: [
       {
-        entry_no: "9",
-        src_bill_type: "采购",
-        src_bill_id: "159999999999",
-        src_no: "CGDD-221120-005",
-        amt: 55555.50,
-        paid_amt: 5555.40,
-        remark: "",
-        custom1: "",
-        custom2: ""
+        entry_no: "9",              //分录号
+        src_bill_type: "采购",        //源单类型
+        src_bill_id: "159999999999",   //源单ID
+        src_no: "CGDD-221120-005",         //原单编号
+        amt: 55555.50,               //申请金额
+        paid_amt: 5555.40,         //已付金额
+        remark: "",               //备注
+        custom1: "",               //自定义1
+        custom2: ""                 //自定义2
       },
       {
         entry_no: "10",
@@ -192,17 +196,21 @@ export function handlePostAdd() {
   )
 }
 
-export function handlePutModifyPay() {
+export function handlePutModifyPay() {        //数据若完全与数据库一致无法修改
   // 自定义请求参数
   let params = {
-    id: "12243087515380236288",
-	  bill_date: "2023-5-5",
-	  subject: "采购笔记本",
-	  op: "李业武",
-	  op_dept: "市场部",
-	  supplier_id: "广电总局",
-	  remark:"附件备注",
-	  attachment: "xxx",
+    id: "12243087515380236288",           //单据ID
+	  bill_date: "2023-5-5",                  //单据日期
+	  subject: "采购笔记本",          //单据主题
+	  op: "李业武",                 //业务员
+	  op_dept: "市场部",           //业务部门
+	  supplier_id: "广电总局",        //供应商
+    is_auto:0,                //是否自动生成（0为否，1为是）
+    is_rubric:0,            //是否为红字单据（0为否，1为是）
+    bill_stage:"编制中",    //如果点保存，就是“编制中”；如果点提交，就是“编制完”
+    version:0,                //版本号
+	  remark:"附件备注",         //附件备注
+	  attachment: "xxx",          //附件
     detail: [
       {
         entry_no: "9",
