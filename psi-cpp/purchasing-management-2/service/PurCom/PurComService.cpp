@@ -126,12 +126,9 @@ PageVO<PurComEntryVO> PurComService::listEntry(const PurComEntryQuery& query)
 
 	// 生成DAO层对象
 	PurComDAO dao;
-
-	//------------------------------------------------------未实现
-	uint64_t count = 1;
 	
 	// 查询数据总条数
-	//uint64_t count = dao.countEntrys(obj);
+	uint64_t count = dao.countEntrys(obj);
 	//
 	// 待加入筛选条件
 	//

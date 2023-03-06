@@ -26,28 +26,28 @@ uint64_t PurComDAO::count(const PurComDO& obj)
 	stringstream sql;
 	sql << "SELECT COUNT(*) FROM pur_compare";
 	SqlParams params;
-	//____������ɸѡ����___
+	//添加筛选条件,目前不需添加
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
 
-// ͳ����ϸ����
+// 统计明细条数
 uint64_t PurComDAO::countEntrys(const PurComEntryDO& obj) 
 {
 	stringstream sql;
 	sql << "SELECT COUNT(*) FROM pur_compare_entry";
 	SqlParams params;
-	//____������ɸѡ����___
+	//添加筛选条件,目前不需添加
 	string sqlStr = sql.str();
 	return sqlSession->executeQueryNumerical(sqlStr, params);
 }
 
-//��ҳ��ѯ����
+//分页查询数据
 list<PurComDO> PurComDAO::selectPurCom(const PurComDO& obj, uint64_t pageIndex, uint64_t pageSize)
 {
 	stringstream sql;
-	// ���Ӳ�ѯ���
+	// 添加查询语句
 	sql << "SELECT id, bill_no, bill_date, src_bill_type,\
 		src_bill_id, src_no, `subject`, is_rubric,\
 		candidate_quot_ids, payment_method, delivery_place,\
@@ -59,25 +59,25 @@ list<PurComDO> PurComDAO::selectPurCom(const PurComDO& obj, uint64_t pageIndex, 
 		update_by, update_time, version FROM pur_compare";
 	SqlParams params;
 
-	// ����ɸѡ���
+	// 添加筛选语句
 	sql << " WHERE 1=1";
-	// ɸѡ����Ϊ���ݱ��
+	// 筛选条件为单据编号
 	if (!obj.getBill_no().empty()) {
 		sql << " AND `bill_no`=?";
 		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getBill_no())));
 	}
-	// ɸѡ����Ϊ����ʱ��
+	// 筛选条件为单据时间
 	// 
-	// ɸѡ����ΪԴ����
+	// 筛选条件为源单号
 	if (!obj.getSrc_no().empty()) {
 		sql << " AND `src_no`=?";
 		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getSrc_no())));
 	}
-	// ��ҳ��ʾ
+	// 分页显示
 	sql << " LIMIT " << ((pageIndex - 1) * pageSize) << "," << pageSize;
 	PurComMapper mapper;
 	string sqlStr = sql.str();
-	// ���ز�ѯ���
+	// 返回查询结果
 	return sqlSession->executeQuery<PurComDO, PurComMapper>(sqlStr, mapper, params);
 }
 
@@ -94,13 +94,13 @@ list<PurComEntryDO> PurComDAO::selectPurComEntry(const PurComEntryDO& obj, uint6
 			custom1, custom2, version \
 			FROM pur_compare_entry";
 	SqlParams params;
-	// ����ɸѡ���
+	// 添加查询语句
 	sql << " WHERE 1=1";
 	if (!obj.getMid().empty()) {
 		sql << " AND `mid`=?";
 		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getMid())));
 	}
-	// ��ҳ��ʾ
+	// 分页显示
 	sql << " LIMIT " << ((pageIndex - 1) * pageSize) << "," << pageSize;
 	PurComEntryMapper mapper;
 	string sqlStr = sql.str();

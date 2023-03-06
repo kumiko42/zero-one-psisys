@@ -38,7 +38,6 @@ public:
 	PurComVO getData(uint64_t id);
 	// 查询指定比价单详情列表
 	PageVO<PurComEntryVO>listEntry(const PurComEntryQuery& query);
-	//PageVO<PurComEntryVO> listEntrys(const PurComEntryQuery& query);
 };
 
 #endif // ! _PUR_COM_SERVICE_
