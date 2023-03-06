@@ -22,6 +22,8 @@
 #include "api/Router.h"
 #include "ServerInfo.h"
 #include "StringUtil.h"
+#include "usrlib/jwt/TestToken.h"
+
 #ifdef CHECK_TOKEN
 #include "usrlib/jwt/TestToken.h"
 #endif
@@ -42,7 +44,7 @@ bool getStartArg(int argc, char* argv[]) {
 	std::string serverPort = "8090";
 	// 数据库连接信息
 	std::string dbUsername = "root";
-	std::string dbPassword = "20020211";
+	std::string dbPassword = "qq123";
 	std::string dbName = "zopsi_sys";
 	std::string dbHost = "127.0.0.1";
 	int dbPort = 3306;
@@ -127,6 +129,7 @@ bool getStartArg(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
+
 #ifdef HTTP_SERVER_DEMO
 	// 测试生成 JWT Token
 	TestToken::generateToken();

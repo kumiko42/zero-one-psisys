@@ -164,7 +164,7 @@
     <ClInclude Include="service\finPaymentReq\finPyamentReqService.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqBillMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqDAO.h" />
-    <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryBIllMapper.h" />
+    <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryBillMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqMapper.h" />
     <ClInclude Include="domain\do\FinPaymentReq\FinPaymentReqEntryDO.h" />

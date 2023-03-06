@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -189,7 +189,7 @@ libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="dao\DoInclude.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqBillMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqDAO.h" />
-    <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryBIllMapper.h" />
+    <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryBillMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqEntryMapper.h" />
     <ClInclude Include="dao\finPaymentReq\finPaymentReqMapper.h" />
     <ClInclude Include="dao\payment\PaymentDAO.h" />

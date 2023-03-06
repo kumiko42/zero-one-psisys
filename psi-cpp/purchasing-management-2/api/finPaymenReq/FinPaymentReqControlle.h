@@ -1,6 +1,5 @@
 #pragma once
 
-
 #ifndef _FIN_PAYMENT_REQ_CONTROLLE_
 #define _FIN_PAYMENT_REQ_CONTROLLE_
 
@@ -17,28 +16,24 @@
 
 
 /**
- * �ɹ����빦�ܵ�
+ * 采购付款申请订单
  */
 class FinPaymentReqControlle
 {
 public:
-	//��ѯ�б�
+	//查询列表
 	CREATE_API_FUN_QUERY_PAYLOAD(queryFinPaymentReq, execQueryPayBill, FinPaymentReqQuery);
-	//��ѯ��ϸ����
+	//查询单个详情
 	CREATE_API_FUN_QUERY_PAYLOAD(queryFinPaymentReqEntry, execQueryPayDetailBill, FinPaymentReqEntryQuery);
-	//����
-	CREATE_API_FUN_BODY_PAYLOAD_FILE(addPaymentReq, execAddPayHandle, AddPaymentReqDTO);
-	//�޸�
+	//修改订单
 	CREATE_API_FUN_BODY_PAYLOAD_FILE(modPaymentReq, execModPayHandle, ModPyamentReqDTO);
 
 private:
-	//��ѯ�б�
+	//查询列表
 	JsonVO<PageVO<FinPaymentReqVO>> execQueryPayBill(const FinPaymentReqQuery& query, const PayloadDTO& payload);
-	//��ѯ��ϸ����
+	//查询单个详情
 	JsonVO<FinPaymentDetailVO> execQueryPayDetailBill(const FinPaymentReqEntryQuery& query, const PayloadDTO& payload);
-	//����
-	JsonVO<uint64_t> execAddPayHandle(const AddPaymentReqDTO& dto, const PayloadDTO& payload);
-	//�޸�
+	//修改订单
 	JsonVO<uint64_t> execModPayHandle(const ModPyamentReqDTO& dto, const PayloadDTO& payload);
 
 };

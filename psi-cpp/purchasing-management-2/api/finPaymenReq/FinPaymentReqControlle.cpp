@@ -17,22 +17,15 @@ JsonVO<PageVO<FinPaymentReqVO>> FinPaymentReqControlle::execQueryPayBill(const F
 */
 JsonVO<FinPaymentDetailVO> FinPaymentReqControlle::execQueryPayDetailBill(const FinPaymentReqEntryQuery& query, const PayloadDTO& payload) {
 	FinPyamentReqService service;
-	FinPaymentDetailVO result = service.detailDate(query);
 	JsonVO<FinPaymentDetailVO> jResult;
-	if (result.getBillNo().empty())
+	if (query.getBillNo().empty())
 	{
 		jResult.setStatus(RS_PARAMS_INVALID);
 		return jResult;
 	}
+	FinPaymentDetailVO result = service.detailDate(query);
 	jResult.success(result);
 	return jResult;
-}
-
-
-JsonVO<uint64_t> FinPaymentReqControlle::execAddPayHandle(const AddPaymentReqDTO& dto, const PayloadDTO& payload)
-{
-	JsonVO<uint64_t> result;
-	return result;
 }
 
 /*
