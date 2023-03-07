@@ -30,15 +30,6 @@ JsonVO<PageVO<PurComVO>> PurComController::execListPurCom(const PurComQuery& que
 	return JsonVO<PageVO<PurComVO>>(result, RS_SUCCESS);
 }
 
-// 查询单个数据
-JsonVO<PurComVO> PurComController::execGetPurCom(const PurComQuery& query)
-{
-	PurComService service;
-	//JsonVO<PurComVO> result = JsonVO(service.getData(query.getId()), RS_SUCCESS);
-	//return result;
-	JsonVO<PurComVO> result;
-	return result;
-}
 
 JsonVO<PageVO<PurComEntryVO>> PurComController::execListPurComEntrys(const PurComEntryQuery& query, const PayloadDTO& payload)
 {

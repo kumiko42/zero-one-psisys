@@ -67,7 +67,14 @@ list<PurComDO> PurComDAO::selectPurCom(const PurComDO& obj, uint64_t pageIndex, 
 		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getBill_no())));
 	}
 	// 筛选条件为单据时间
-	// 
+	if (!obj.getBill_date().empty()) {
+		sql << " AND `bill_date`>=?";
+		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getBill_date())));
+	}
+	if (!obj.getBill_date().empty()) {
+		sql << " AND `bill_date`<=?";
+		params.push_back(SqlParam("s", std::make_shared<std::string>(obj.getBill_date_end())));
+	}
 	// 筛选条件为源单号
 	if (!obj.getSrc_no().empty()) {
 		sql << " AND `src_no`=?";
@@ -84,7 +91,7 @@ list<PurComDO> PurComDAO::selectPurCom(const PurComDO& obj, uint64_t pageIndex, 
 list<PurComEntryDO> PurComDAO::selectPurComEntry(const PurComEntryDO& obj, uint64_t pageIndex, uint64_t pageSize)
 {
 	stringstream sql;
-	// ���Ӳ�ѯ���
+	// 添加查询语句
 	sql << "SELECT id, mid, bill_no, \
 			entry_no, src_bill_type, src_bill_id, \
 			src_entry_id, src_no, supplier_id, \
@@ -94,7 +101,7 @@ list<PurComEntryDO> PurComDAO::selectPurComEntry(const PurComEntryDO& obj, uint6
 			custom1, custom2, version \
 			FROM pur_compare_entry";
 	SqlParams params;
-	// 添加查询语句
+	// 添加筛选条件
 	sql << " WHERE 1=1";
 	if (!obj.getMid().empty()) {
 		sql << " AND `mid`=?";

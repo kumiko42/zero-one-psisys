@@ -23,16 +23,18 @@
 // 分页查询所有数据
 PageVO<PurComVO> PurComService::listAll(const PurComQuery& query)
 {
-	// 构建返回对象
+	// 构造返回对象
 	PageVO<PurComVO> pages;
 	pages.setPageIndex(query.getPageIndex());
 	pages.setPageSize(query.getPageSize());
 
-	// 构造DO
+	// 构造DO,填写可能用到的成员
 	PurComDO obj;
 	obj.setBill_no(query.getBill_no());
 	obj.setBill_date(query.getBill_date());
-	
+	obj.setBill_date_end(query.getBill_date_end());
+	obj.setSrc_no(query.getSrc_no());
+
 	// 生成DAO层对象
 	PurComDAO dao;
 	
@@ -105,12 +107,6 @@ PageVO<PurComVO> PurComService::listAll(const PurComQuery& query)
 	return pages;
 }
 
-// 查询单个数据
-PurComVO PurComService::getData(uint64_t id) {
-	PurComVO data;
-
-	return data;
-}
 
 // 查询指定比价单的明细列表
 PageVO<PurComEntryVO> PurComService::listEntry(const PurComEntryQuery& query)
